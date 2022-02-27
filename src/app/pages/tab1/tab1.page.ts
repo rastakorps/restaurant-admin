@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { CreateOrderModalComponent } from '../../components/create-order-modal/create-order-modal.component';
+import { Saucer } from '../../interfaces/index';
 
 @Component({
   selector: 'app-tab1',
@@ -8,8 +10,11 @@ import { AlertController } from '@ionic/angular';
 })
 export class Tab1Page {
 
+  modalDataResponse: any;
+
   constructor(
     public alertController: AlertController,
+    public modalCtrl: ModalController,
   ) {}
 
   async createNewOrder() {
@@ -34,7 +39,12 @@ export class Tab1Page {
         }, {
           text: 'Ok',
           handler: (alertData) => {    
-            
+            let data: Saucer;
+            data = {
+              name: alertData.name,
+              description: alertData.description,
+              status: true
+            }   
           }
         }
       ]
@@ -43,4 +53,20 @@ export class Tab1Page {
     await alert.present();
   }
 
+  async openCreateModal(saucer: Saucer) {
+    const modal = await this.modalCtrl.create({
+      component: CreateOrderModalComponent,
+      componentProps: {
+        'saucer': saucer
+      }
+    });
+
+    modal.onDidDismiss().then((modalDataResponse) => {
+      if (modalDataResponse !== null) {
+        this.modalDataResponse = modalDataResponse.data;
+      }
+    });
+
+    return await modal.present();
+  }
 }
