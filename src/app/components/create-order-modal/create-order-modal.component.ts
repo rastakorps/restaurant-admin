@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController, LoadingController } from '@ionic/angular';
+import { Saucer } from '../../interfaces/index';
+import { RestaurantRestService } from '../../services/restaurant-rest.service';
 
 @Component({
   selector: 'app-create-order-modal',
@@ -7,8 +10,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateOrderModalComponent implements OnInit {
 
-  constructor() { }
+  @Input() orderName: string;
+  public saucers: Saucer[] = [];
 
-  ngOnInit() {}
+  constructor(
+    private modalCtr: ModalController,
+    public loadingController: LoadingController,
+    private restaurantRestService: RestaurantRestService
+  ) { }
+
+  ngOnInit() {
+    const loading = this.presentLoading();
+    this.restaurantRestService.getSaucers()
+      .subscribe( (data:any) => {
+        this.saucers.push(...data.saucers);
+        this.loadingController.dismiss();        
+      });
+  }
+
+  async close() {
+    const closeModal: string = "Modal Closed";
+    await this.modalCtr.dismiss(closeModal);
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...'
+    });
+    return await loading.present();
+  }
 
 }

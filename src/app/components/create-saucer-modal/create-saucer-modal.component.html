@@ -21,5 +21,10 @@
     <ion-textarea [(ngModel)]="description"></ion-textarea>
   </ion-item>
 
+  <ion-item>
+    <ion-label position="floating">Precio</ion-label>
+    <ion-input type="number" [(ngModel)]="price"></ion-input>
+  </ion-item>
+
   <ion-button expand="block" (click)="createSaucer()">Crear</ion-button>
 </ion-content>

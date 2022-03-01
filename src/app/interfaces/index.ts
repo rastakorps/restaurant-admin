@@ -1,6 +1,7 @@
 export interface Saucer {
-    id?: Number;
+    id?: number;
     name: string;
     description: string;
+    price: number;
     status?: Boolean;
 }

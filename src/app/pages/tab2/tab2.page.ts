@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
 import { CreateSaucerModalComponent } from '../../components/create-saucer-modal/create-saucer-modal.component';
+import { RestaurantRestService } from '../../services/restaurant-rest.service';
+import { Saucer } from '../../interfaces/index';
 
 @Component({
   selector: 'app-tab2',
@@ -9,17 +11,38 @@ import { CreateSaucerModalComponent } from '../../components/create-saucer-modal
 })
 export class Tab2Page {
 
+  public saucers: Saucer[] = [];
   modalDataResponse: any;
 
-  constructor(public modalCtrl: ModalController,) {}
+  constructor(
+    public modalCtrl: ModalController,
+    public loadingController: LoadingController,
+    private restaurantRestService: RestaurantRestService
+  ) {}
 
-  async createNewSaucer() {
+  ngOnInit(){
+    const loading = this.presentLoading();
+    this.restaurantRestService.getSaucers()
+      .subscribe( (data:any) => {
+        this.saucers.push(...data.saucers);
+        this.loadingController.dismiss();
+        
+      });
+  }
+
+  async openNewSaucerModal() {
     const modal = await this.modalCtrl.create({
       component: CreateSaucerModalComponent,
     });
 
     modal.onDidDismiss().then((modalDataResponse) => {
       if (modalDataResponse !== null) {
+        this.restaurantRestService.getSaucers()
+          .subscribe( (data:any) => {
+            this.saucers = [];
+            this.saucers.push(...data.saucers);
+
+          });
         this.modalDataResponse = modalDataResponse.data;
       }
     });
@@ -27,4 +50,10 @@ export class Tab2Page {
     return await modal.present();
   }
 
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...'
+    });
+    return await loading.present();
+  }
 }

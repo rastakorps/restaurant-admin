@@ -12,6 +12,7 @@ export class CreateSaucerModalComponent implements OnInit {
 
   name:string;
   description:string;
+  price: number;
 
   constructor(
     private modalCtr: ModalController,
@@ -34,13 +35,15 @@ export class CreateSaucerModalComponent implements OnInit {
         let data: Saucer;
               data = {
                 name: this.name,
-                description: this.description
+                description: this.description,
+                price: this.price
               } 
         console.log(data) 
         this.restaurantRestService.addSaucer(data)
                   .subscribe((response) => {
                     loading.then(() => { this.loadingController.dismiss();});
                     this.presentToast(message);
+                    this.close();
                   },
                   (error) => {
                     loading.then(() => { this.loadingController.dismiss(); });

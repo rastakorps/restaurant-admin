@@ -1,3 +1,19 @@
-<p>
-  create-order-modal works!
-</p>
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Nueva orden: {{orderName}}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button color="primary" (click)="close()">
+        Regresar
+        <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-saucer-item-normal
+  *ngFor="let saucer of saucers; let i = index"
+  [saucer] = "saucer"
+  >
+  </app-saucer-item-normal>
+</ion-content>

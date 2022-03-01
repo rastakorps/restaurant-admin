@@ -8,9 +8,14 @@
 
 <ion-content [fullscreen]="true">
   <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="createNewSaucer()">
+    <ion-fab-button (click)="openNewSaucerModal()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
+  <app-saucer-item
+  *ngFor="let saucer of saucers; let i = index"
+  [saucer] = "saucer"
+  >
+  </app-saucer-item>
 </ion-content>

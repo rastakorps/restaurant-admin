@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, LoadingController } from '@ionic/angular';
 import { CreateOrderModalComponent } from '../../components/create-order-modal/create-order-modal.component';
 import { Saucer } from '../../interfaces/index';
+import { RestaurantRestService } from '../../services/restaurant-rest.service';
 
 @Component({
   selector: 'app-tab1',
@@ -11,11 +12,23 @@ import { Saucer } from '../../interfaces/index';
 export class Tab1Page {
 
   modalDataResponse: any;
+  orderName: string;
 
   constructor(
     public alertController: AlertController,
     public modalCtrl: ModalController,
+    public loadingController: LoadingController,
+    private restaurantRestService: RestaurantRestService
   ) {}
+
+  ngOnInit() {
+    /*const loading = this.presentLoading();
+    this.restaurantRestService.getSaucers()
+      .subscribe( (data:any) => {
+        this.saucers.push(...data.saucers);
+        this.loadingController.dismiss();        
+      });*/
+  }
 
   async createNewOrder() {
     const alert = await this.alertController.create({
@@ -38,13 +51,9 @@ export class Tab1Page {
           }
         }, {
           text: 'Ok',
-          handler: (alertData) => {    
-            let data: Saucer;
-            data = {
-              name: alertData.name,
-              description: alertData.description,
-              status: true
-            }   
+          handler: (alertData) => {
+            this.orderName = alertData.name;  
+            this.openNewOrderModal();
           }
         }
       ]
@@ -53,11 +62,11 @@ export class Tab1Page {
     await alert.present();
   }
 
-  async openCreateModal(saucer: Saucer) {
+  async openNewOrderModal() {
     const modal = await this.modalCtrl.create({
       component: CreateOrderModalComponent,
       componentProps: {
-        'saucer': saucer
+        'orderName': this.orderName
       }
     });
 
@@ -68,5 +77,12 @@ export class Tab1Page {
     });
 
     return await modal.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...'
+    });
+    return await loading.present();
   }
 }
