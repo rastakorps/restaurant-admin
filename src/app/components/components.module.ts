@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { SaucerItemComponent } from './saucer-item/saucer-item.component';
 import { SaucerItemNormalComponent } from './saucer-item-normal/saucer-item-normal.component';
 import { CreateOrderModalComponent } from './create-order-modal/create-order-modal.component';
+import { SaucerDetailComponent } from './saucer-detail/saucer-detail.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { CreateOrderModalComponent } from './create-order-modal/create-order-mod
     CreateSaucerModalComponent,
     CreateOrderModalComponent,
     SaucerItemComponent,
-    SaucerItemNormalComponent
+    SaucerItemNormalComponent,
+    SaucerDetailComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { CreateOrderModalComponent } from './create-order-modal/create-order-mod
     CreateSaucerModalComponent,
     CreateOrderModalComponent,
     SaucerItemComponent,
-    SaucerItemNormalComponent
+    SaucerItemNormalComponent,
+    SaucerDetailComponent
   ]
 })
 export class ComponentsModule { }

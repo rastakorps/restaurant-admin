@@ -1,0 +1,49 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="close()">
+        <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img src="https://media-cdn.tripadvisor.com/media/photo-s/18/a9/9e/47/caldo-de-mariscos.jpg" class="img-default">
+  <ion-grid class="ion-margin">
+    <ion-row>
+      <ion-text>
+        <h1><b>{{saucer.name}}</b></h1>
+      </ion-text>
+    </ion-row>
+    <ion-row>
+      <p>
+        {{saucer.description}}
+      </p>
+    </ion-row>
+    <ion-row>
+      <ion-text>
+        <h5><b>${{saucer.price}}</b></h5>
+      </ion-text>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer collapse="fade">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="quantity-items-custom">
+            <ion-icon name="remove-circle" (click)="decrement()"></ion-icon>
+            <p class="quantity-custom"><b>{{quantity}}</b></p>
+            <ion-icon name="add-circle" (click)="increment()"></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col>
+          <ion-button color="success" expand="full" (click)="addSaucer()">Agregar ${{total}}</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

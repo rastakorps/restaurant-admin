@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, LoadingController } from '@ionic/angular';
-import { Saucer } from '../../interfaces/index';
+import { Saucer } from '../../interfaces';
 import { RestaurantRestService } from '../../services/restaurant-rest.service';
 
 @Component({
@@ -15,8 +15,8 @@ export class CreateOrderModalComponent implements OnInit {
 
   constructor(
     private modalCtr: ModalController,
-    public loadingController: LoadingController,
-    private restaurantRestService: RestaurantRestService
+    private restaurantRestService: RestaurantRestService,
+    public loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -39,5 +39,4 @@ export class CreateOrderModalComponent implements OnInit {
     });
     return await loading.present();
   }
-
 }

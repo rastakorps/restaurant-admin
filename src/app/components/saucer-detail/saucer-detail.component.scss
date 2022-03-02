@@ -1,0 +1,21 @@
+ion-item-option::part(native) {
+    min-width: 60px;
+}
+
+ion-icon {
+    font-size: 40px; //Preferred size here
+}
+
+.img-default {
+    object-fit: cover !important;
+    height: 250px !important;
+    width: 100% !important;
+}
+
+.quantity-items-custom {
+    display: flex;
+}
+
+.quantity-custom {
+    margin-inline: 15px;
+}

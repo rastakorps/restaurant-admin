@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController, ModalController, LoadingController } from '@ionic/angular';
 import { CreateOrderModalComponent } from '../../components/create-order-modal/create-order-modal.component';
-import { Saucer } from '../../interfaces/index';
 import { RestaurantRestService } from '../../services/restaurant-rest.service';
 
 @Component({
