@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Saucer } from '../../interfaces';
 import { ModalController } from '@ionic/angular';
 import { SaucerDetailComponent } from '../saucer-detail/saucer-detail.component';
+import { OrderSaucer } from '../../interfaces/index';
 
 @Component({
   selector: 'app-saucer-item-normal',
@@ -11,7 +12,9 @@ import { SaucerDetailComponent } from '../saucer-detail/saucer-detail.component'
 export class SaucerItemNormalComponent implements OnInit {
 
   @Input() saucer: Saucer;
+  @Output() saucerSelected = new EventEmitter();
   modalDataResponse: any;
+  public orderSaucer: OrderSaucer;
 
   constructor(
     public modalCtrl: ModalController,
@@ -29,7 +32,11 @@ export class SaucerItemNormalComponent implements OnInit {
 
     modal.onDidDismiss().then((modalDataResponse) => {
       if (modalDataResponse.data !== undefined) {
-        console.log(modalDataResponse)
+        this.orderSaucer = {
+          id: modalDataResponse.data.id,
+          quantity: modalDataResponse.data.quantity
+        }
+        this.saucerSelected.emit(this.orderSaucer);
         //this.modalDataResponse = modalDataResponse.data;
       }
     });

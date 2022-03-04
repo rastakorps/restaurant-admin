@@ -22,7 +22,7 @@ export class Tab1Page {
 
   ngOnInit() {
     /*const loading = this.presentLoading();
-    this.restaurantRestService.getSaucers()
+    this.restaurantRestService.getOrders()
       .subscribe( (data:any) => {
         this.saucers.push(...data.saucers);
         this.loadingController.dismiss();        

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Saucer } from '../interfaces/index';
+import { Saucer, Order } from '../interfaces';
 import { environment } from '../../environments/environment.prod';
 
 const apiUrl = environment.apiUrl;
@@ -18,6 +18,7 @@ export class RestaurantRestService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  /* Saucers requests */
 
   addSaucer(saucer: Saucer): Observable<any> {
     return this.http.post<Saucer>(`${ apiUrl }saucers`, saucer, this.httpHeader)
@@ -31,6 +32,15 @@ export class RestaurantRestService {
       .pipe(
         tap(Saucer => console.log('Saucer fetched!')),
         catchError(this.handleError<Saucer[]>('Get Saucers', []))
+      );
+  }
+  
+  /* Orders requests */
+
+  addOrder(order: Order): Observable<any> {
+    return this.http.post<Order>(`${ apiUrl }orders`, order, this.httpHeader)
+      .pipe(
+        catchError(this.handleError<any>('Add Order'))
       );
   }
 

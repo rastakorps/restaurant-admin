@@ -12,7 +12,7 @@ export interface OrderSaucer {
 }
 
 export interface Order {
-    id: number;
+    id?: number;
     name: string;
     total?: number;
     saucers: OrderSaucer[];

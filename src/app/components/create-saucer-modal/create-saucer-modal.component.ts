@@ -38,7 +38,7 @@ export class CreateSaucerModalComponent implements OnInit {
                 description: this.description,
                 price: this.price
               } 
-        console.log(data) 
+         
         this.restaurantRestService.addSaucer(data)
                   .subscribe((response) => {
                     loading.then(() => { this.loadingController.dismiss();});

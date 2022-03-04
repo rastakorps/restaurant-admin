@@ -14,6 +14,13 @@
   <app-saucer-item-normal
   *ngFor="let saucer of saucers; let i = index"
   [saucer] = "saucer"
+  (saucerSelected)=addSaucerToOrder($event)
   >
   </app-saucer-item-normal>
 </ion-content>
+
+<ion-footer collapse="fade">
+  <ion-toolbar>
+    <ion-button color="success" expand="full" (click)="createOrder()">Crear</ion-button>
+  </ion-toolbar>
+</ion-footer>
