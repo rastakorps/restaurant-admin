@@ -10,12 +10,18 @@ import { Saucer, OrderSaucer } from '../../interfaces/index';
 export class SaucerDetailComponent implements OnInit {
 
   @Input() saucer: Saucer;
+  @Input() saucerQuantity: number;
   private quantity: number = 0;
   public total: number = 0;
 
   constructor(private modalCtr: ModalController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.saucerQuantity > 0) {
+      this.quantity = this.saucerQuantity;
+      this.total = (this.quantity * parseFloat(this.saucer.price.toString()));
+    }
+  }
 
   async close() {
     await this.modalCtr.dismiss();

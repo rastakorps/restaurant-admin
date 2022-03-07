@@ -1,6 +1,6 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Nueva orden: {{orderName}}</ion-title>
+    <ion-title>Editar orden # {{order.id}} - {{order.name | titlecase}}</ion-title>
     <ion-buttons slot="primary">
       <ion-button color="primary" (click)="close()">
         Regresar
@@ -14,14 +14,14 @@
   <app-saucer-item-normal
   *ngFor="let saucer of saucers; let i = index"
   [saucer] = "saucer"
-  [saucersToEdit] = "[]"
-  (saucerSelected)=addSaucerToOrder($event)
+  [saucersToEdit] = "saucersToEdit"
+  (saucerSelected)=updateSaucerToOrder($event)
   >
   </app-saucer-item-normal>
 </ion-content>
 
 <ion-footer collapse="fade">
   <ion-toolbar>
-    <ion-button color="success" expand="full" (click)="createOrder()">Crear</ion-button>
+    <ion-button color="success" expand="full" (click)="createOrder()">Guardar</ion-button>
   </ion-toolbar>
 </ion-footer>

@@ -13,4 +13,12 @@
     </ion-fab-button>
   </ion-fab>
 
+  <app-order-item
+  *ngFor="let order of orders; let i = index"
+  [order] = "order"
+  (showOrder)=openShowOrder($event)
+  (editOrder)=openEditOrder($event)
+  (deleteOrder)=removeOrder($event)
+  >
+  </app-order-item>
 </ion-content>

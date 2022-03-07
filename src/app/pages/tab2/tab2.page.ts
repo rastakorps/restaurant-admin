@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, LoadingController } from '@ionic/angular';
+import { ModalController, LoadingController, ToastController } from '@ionic/angular';
 import { CreateSaucerModalComponent } from '../../components/create-saucer-modal/create-saucer-modal.component';
 import { RestaurantRestService } from '../../services/restaurant-rest.service';
 import { Saucer } from '../../interfaces/index';
@@ -17,6 +17,7 @@ export class Tab2Page {
   constructor(
     public modalCtrl: ModalController,
     public loadingController: LoadingController,
+    public toastController: ToastController,
     private restaurantRestService: RestaurantRestService
   ) {}
 
@@ -55,5 +56,35 @@ export class Tab2Page {
       message: 'Please wait...'
     });
     return await loading.present();
+  }
+
+  async presentToast(message:string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  removeSaucer(saucerId:Number) {
+    const loading = this.presentLoading();
+    const message = "Se ha eliminado el platillo!!!";
+    this.restaurantRestService.deleteSaucer(saucerId)
+      .subscribe(() => {
+        this.restaurantRestService.getSaucers()
+          .subscribe((data:any) => {
+            this.saucers = [];
+            this.saucers.push(...data.saucers);
+            this.presentToast(message);             
+          },
+          (error) => {
+            loading.then(() => { this.loadingController.dismiss();});
+          },
+          () => {
+            loading.then(() => { this.loadingController.dismiss();});
+          });
+        }
+      )
   }
 }

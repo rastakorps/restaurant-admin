@@ -7,6 +7,9 @@ import { SaucerItemComponent } from './saucer-item/saucer-item.component';
 import { SaucerItemNormalComponent } from './saucer-item-normal/saucer-item-normal.component';
 import { CreateOrderModalComponent } from './create-order-modal/create-order-modal.component';
 import { SaucerDetailComponent } from './saucer-detail/saucer-detail.component';
+import { OrderItemComponent } from './order-item/order-item.component';
+import { ShowOrderComponent } from './show-order/show-order.component';
+import { EditOrderModalComponent } from './edit-order-modal/edit-order-modal.component';
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import { SaucerDetailComponent } from './saucer-detail/saucer-detail.component';
     CreateOrderModalComponent,
     SaucerItemComponent,
     SaucerItemNormalComponent,
-    SaucerDetailComponent
+    SaucerDetailComponent,
+    OrderItemComponent,
+    ShowOrderComponent,
+    EditOrderModalComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +33,10 @@ import { SaucerDetailComponent } from './saucer-detail/saucer-detail.component';
     CreateOrderModalComponent,
     SaucerItemComponent,
     SaucerItemNormalComponent,
-    SaucerDetailComponent
+    SaucerDetailComponent,
+    OrderItemComponent,
+    ShowOrderComponent,
+    EditOrderModalComponent
   ]
 })
 export class ComponentsModule { }

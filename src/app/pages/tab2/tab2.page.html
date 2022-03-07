@@ -16,6 +16,7 @@
   <app-saucer-item
   *ngFor="let saucer of saucers; let i = index"
   [saucer] = "saucer"
+  (deleteSaucer)=removeSaucer($event)
   >
   </app-saucer-item>
 </ion-content>

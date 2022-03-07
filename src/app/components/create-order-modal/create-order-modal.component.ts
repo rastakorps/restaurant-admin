@@ -11,6 +11,7 @@ import { RestaurantRestService } from '../../services/restaurant-rest.service';
 export class CreateOrderModalComponent implements OnInit {
 
   @Input() orderName: string;
+  public wasAdded: Boolean = false;
   public saucers: Saucer[] = [];
   public order: Order = {
     name: '',
@@ -47,7 +48,17 @@ export class CreateOrderModalComponent implements OnInit {
   }
 
   addSaucerToOrder(orderSaucer: OrderSaucer) {
-    this.order.saucers.push(orderSaucer);
+    if(this.order.saucers.some(item => item.id == orderSaucer.id)) {
+      this.order.saucers.forEach((saucer) => {
+        if(saucer.id == orderSaucer.id){
+          saucer.quantity = orderSaucer.quantity;
+        }
+      });
+      console.log('after added');
+      console.log(this.order);
+    } else{
+      this.order.saucers.push(orderSaucer);
+    }
   }
 
   createOrder() {
