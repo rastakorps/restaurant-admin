@@ -1,9 +1,9 @@
 <ion-item-sliding #slidingItem>
   <ion-item (click)="openSliding(slidingItem)">
     <ion-label>
-      <ion-badge color="warning">Orden #{{order.id}}</ion-badge>
+      <ion-badge color="salmon"><b>Orden #{{order.id}}</b></ion-badge>
       <p><b>{{order.name}}</b></p>
-      <ion-badge color="primary">${{order.total}}</ion-badge>
+      <p><b>${{order.total}}</b></p>
     </ion-label>
     <ion-icon name="arrow-forward-outline" size="large" slot="end" color="powerdblue"></ion-icon>
   </ion-item>

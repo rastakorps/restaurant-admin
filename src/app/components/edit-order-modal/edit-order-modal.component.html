@@ -1,27 +1,29 @@
 <ion-header [translucent]="true" class="ion-no-border">
-  <ion-toolbar>
-    <ion-title>Editar orden # {{order.id}} - {{order.name | titlecase}}</ion-title>
+  <ion-toolbar color="thistle">
+    <ion-title>Editar orden #{{order.id}} - {{order.name | titlecase}}</ion-title>
     <ion-buttons slot="primary">
-      <ion-button color="primary" (click)="close()">
-        Regresar
+      <ion-button color="dark" (click)="close()">
+        <b>Regresar</b>
         <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <app-saucer-item-normal
-  *ngFor="let saucer of saucers; let i = index"
-  [saucer] = "saucer"
-  [saucersToEdit] = "saucersToEdit"
-  (saucerSelected)=updateSaucerToOrder($event)
-  >
-  </app-saucer-item-normal>
+<ion-content [fullscreen]="true" color="powerdblue" class="custom-content">
+  <ion-list class="custom-list">
+    <app-saucer-item-normal
+    *ngFor="let saucer of saucers; let i = index"
+    [saucer] = "saucer"
+    [saucersToEdit] = "saucersToEdit"
+    (saucerSelected)=updateSaucerToOrder($event)
+    >
+    </app-saucer-item-normal>
+  </ion-list>
 </ion-content>
 
 <ion-footer collapse="fade">
-  <ion-toolbar>
+  <ion-toolbar color="thistle">
     <ion-button color="success" expand="full" (click)="createOrder()">Guardar</ion-button>
   </ion-toolbar>
 </ion-footer>

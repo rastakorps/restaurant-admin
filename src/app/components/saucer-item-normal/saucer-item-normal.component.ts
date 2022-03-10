@@ -16,7 +16,7 @@ export class SaucerItemNormalComponent implements OnInit {
   @Output() saucerSelected = new EventEmitter();
   modalDataResponse: any;
   public orderSaucer: OrderSaucer;
-  public dynamicColor: string = null;
+  public dynamicColor: string = 'light';
   public saucerQuantity: number = 0;
 
   constructor(
@@ -52,7 +52,7 @@ export class SaucerItemNormalComponent implements OnInit {
         this.saucerQuantity = this.orderSaucer.quantity;
 
         if(this.orderSaucer.quantity == 0) {
-          this.dynamicColor = null;
+          this.dynamicColor = 'light';
           //const isLargeNumber = (element) => element.id == this.orderSaucer.id;
           //const toDelete = this.saucersToEdit.findIndex(isLargeNumber);
           //this.saucersToEdit.splice(toDelete, 1);
