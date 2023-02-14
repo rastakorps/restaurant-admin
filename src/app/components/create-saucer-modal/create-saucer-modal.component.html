@@ -1,30 +1,35 @@
 <ion-header [translucent]="true" class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar color="thistle">
     <ion-title>Nuevo platillo</ion-title>
     <ion-buttons slot="primary">
-      <ion-button color="primary" (click)="close()">
-        Regresar
+      <ion-button color="dark" (click)="close()">
+        <b>Regresar</b>
         <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-item>
+<ion-content color="powerdblue" class="ion-padding">
+  <ion-item class="ion-margin-bottom custom-input">
     <ion-label position="floating">Nombre de platillo</ion-label>
     <ion-input [(ngModel)]="name"></ion-input>
   </ion-item>
 
-  <ion-item>
+  <ion-item class="ion-margin-bottom custom-input">
     <ion-label position="floating">Descripción</ion-label>
     <ion-textarea [(ngModel)]="description"></ion-textarea>
   </ion-item>
 
-  <ion-item>
+  <ion-item class="ion-margin-bottom custom-input">
     <ion-label position="floating">Precio</ion-label>
-    <ion-input type="number" [(ngModel)]="price"></ion-input>
+    <ion-input type="number" [(ngModel)]="price" placeholder="$0.00"></ion-input>
   </ion-item>
 
-  <ion-button expand="block" (click)="createSaucer()">Crear</ion-button>
+  <ion-button expand="block" color="primary" (click)="selectImage()">
+    <ion-icon slot="start" name="camera"></ion-icon>
+    Seleccionar imagen
+  </ion-button>
+
+  <ion-button expand="block" color="success" class="ion-margin-top" (click)="createSaucer()">Crear</ion-button>
 </ion-content>

@@ -29,8 +29,14 @@ export class Tab1Page {
     const loading = this.presentLoading();
     this.restaurantRestService.getOrders()
       .subscribe( (data:any) => {
-        this.orders.push(...data.orders);
-        this.loadingController.dismiss();        
+        this.orders.push(...data.orders);     
+      },
+      (error) => {
+        console.warn(error);
+        loading.then(() => { this.loadingController.dismiss();});
+      },
+      () => {
+        loading.then(() => { this.loadingController.dismiss();});
       });
   }
 
@@ -75,6 +81,7 @@ export class Tab1Page {
     });
 
     modal.onDidDismiss().then((modalDataResponse) => {
+      
       if (modalDataResponse !== null) {
         this.modalDataResponse = modalDataResponse.data;
       }
@@ -128,6 +135,23 @@ export class Tab1Page {
       }
     });
 
+    modal.onDidDismiss().then((modalDataResponse) => {      
+      if (modalDataResponse !== null && modalDataResponse.data.reloadOrders) {
+        const loading = this.presentLoading();
+        this.restaurantRestService.getOrders()
+        .subscribe( (data:any) => {
+          this.orders = [];
+          this.orders.push(...data.orders);      
+        },
+        (error) => {
+          console.warn(error);
+          loading.then(() => { this.loadingController.dismiss();});
+        },
+        () => {
+          loading.then(() => { this.loadingController.dismiss();});
+        });
+      }
+    });
     return await modal.present();
   }
 
@@ -139,6 +163,24 @@ export class Tab1Page {
       }
     });
 
+    modal.onDidDismiss().then((modalDataResponse) => {      
+      if (modalDataResponse !== null && modalDataResponse.data.reloadOrders) {
+        const loading = this.presentLoading();
+        this.restaurantRestService.getOrders()
+        .subscribe( (data:any) => {
+          this.orders = [];
+          this.orders.push(...data.orders);      
+        },
+        (error) => {
+          console.warn(error);
+          loading.then(() => { this.loadingController.dismiss();});
+        },
+        () => {
+          loading.then(() => { this.loadingController.dismiss();});
+        });
+      }
+    });
+    
     return await modal.present();
   }
 }

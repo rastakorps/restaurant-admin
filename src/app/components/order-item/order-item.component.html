@@ -1,5 +1,8 @@
 <ion-item-sliding #slidingItem>
   <ion-item (click)="openSliding(slidingItem)">
+    <ion-thumbnail slot="start">
+      <img src="https://cdn-icons-png.flaticon.com/512/1632/1632670.png">
+    </ion-thumbnail>
     <ion-label>
       <ion-badge color="salmon"><b>Orden #{{order.id}}</b></ion-badge>
       <p><b>{{order.name}}</b></p>

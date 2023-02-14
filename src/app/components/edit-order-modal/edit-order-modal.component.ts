@@ -56,8 +56,13 @@ export class EditOrderModalComponent implements OnInit {
       });
   }
 
-  async close() {
+  async returnPage() {
     const closeModal: string = "Modal Closed";
+    await this.modalCtr.dismiss(closeModal);
+  }
+
+  async close() {
+    const closeModal: any = {reloadOrders: true};
     await this.modalCtr.dismiss(closeModal);
   }
 
@@ -109,11 +114,13 @@ export class EditOrderModalComponent implements OnInit {
     //this.order.saucers.push(orderSaucer);
   }
 
-  /*createOrder() {
+  updateOrder() {
+    console.log(this.order);
+    
     const loading = this.presentLoading();
-    const message = "Se ha creado la orden";
+    const message = "Se ha actualizado la orden";
     const promise = new Promise((resolve, reject) => {
-        this.restaurantRestService.addOrder(this.order)
+        this.restaurantRestService.updateOrder(this.orderId, this.order)
                   .subscribe((response) => {
                     loading.then(() => { this.loadingController.dismiss();});
                     this.presentToast(message);
@@ -124,7 +131,7 @@ export class EditOrderModalComponent implements OnInit {
                   }); 
     });
     return promise;
-  }*/
+  }
 
   async presentToast(message:string) {
     const toast = await this.toastController.create({

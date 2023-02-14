@@ -27,6 +27,13 @@ export class RestaurantRestService {
       );
   }
 
+  addImage(data: any): Observable<any> {
+    return this.http.post<any>(`${ apiUrl }saucers/images`, data, this.httpHeader)
+      .pipe(
+        catchError(this.handleError<Saucer>('Add Saucer Image'))
+      );
+  }
+
   getSaucers(): Observable<Saucer[]> {
     return this.http.get<Saucer[]>(`${ apiUrl }saucers`)
       .pipe(
@@ -73,6 +80,23 @@ export class RestaurantRestService {
       .pipe(
         tap(_ => console.log(`Order deleted: ${id}`)),
         catchError(this.handleError<any>('Delete order'))
+      );
+  }
+
+  updateOrder(id, data: any): Observable<any> {
+    data._method = 'put';
+    return this.http.post(`${ apiUrl }orders/${id}`, data, this.httpHeader)
+      .pipe(
+        tap(_ => console.log(`order updated: ${id}`)),
+        catchError(this.handleError<any[]>('Update task'))
+      );
+  }
+
+  finishOrder(id): Observable<any> {
+    return this.http.put(`${ apiUrl }orders/finish-order/${id}`, this.httpHeader)
+      .pipe(
+        tap(_ => console.log(`order finished: ${id}`)),
+        catchError(this.handleError<any[]>('Update task'))
       );
   }
 

@@ -25,9 +25,14 @@ export class Tab2Page {
     const loading = this.presentLoading();
     this.restaurantRestService.getSaucers()
       .subscribe( (data:any) => {
-        this.saucers.push(...data.saucers);
-        this.loadingController.dismiss();
-        
+        this.saucers.push(...data.saucers);        
+      },
+      (error) => {
+        console.warn(error);
+        loading.then(() => { this.loadingController.dismiss();});
+      },
+      () => {
+        loading.then(() => { this.loadingController.dismiss();});
       });
   }
 
@@ -68,6 +73,8 @@ export class Tab2Page {
   }
 
   removeSaucer(saucerId:Number) {
+    console.log(saucerId);
+    
     const loading = this.presentLoading();
     const message = "Se ha eliminado el platillo!!!";
     this.restaurantRestService.deleteSaucer(saucerId)
@@ -86,5 +93,9 @@ export class Tab2Page {
           });
         }
       )
+  }
+
+  openShowSaucer(saucerId:Number) {
+    
   }
 }

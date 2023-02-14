@@ -1,16 +1,16 @@
 <ion-header [translucent]="true" class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar color="thistle">
     <ion-buttons slot="primary">
-      <ion-button color="primary" (click)="close()">
-        Regresar
+      <ion-button color="dark" (click)="close()">
+        <b>Regresar</b>
         <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <img src="https://media-cdn.tripadvisor.com/media/photo-s/18/a9/9e/47/caldo-de-mariscos.jpg" class="img-default">
+<ion-content color="powerdblue">
+  <img [src]="saucer.imagePath != null ? domSanitizationService.bypassSecurityTrustUrl(saucer.imagePath) : imageDefault" class="img-default">
   <ion-grid class="ion-margin">
     <ion-row>
       <ion-text>
@@ -30,8 +30,8 @@
   </ion-grid>
 </ion-content>
 
-<ion-footer collapse="fade">
-  <ion-toolbar>
+<ion-footer *ngIf="showFooter" collapse="fade">
+  <ion-toolbar color="thistle">
     <ion-grid>
       <ion-row>
         <ion-col>

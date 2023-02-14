@@ -1,22 +1,25 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
+  <ion-toolbar color="thistle">
+    <ion-title color="dark">
       Menú
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" color="powerdblue" class="custom-content">
   <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="openNewSaucerModal()">
-      <ion-icon name="add"></ion-icon>
+    <ion-fab-button (click)="openNewSaucerModal()" color="salmon">
+      <ion-icon name="add" color="light"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <app-saucer-item
-  *ngFor="let saucer of saucers; let i = index"
-  [saucer] = "saucer"
-  (deleteSaucer)=removeSaucer($event)
-  >
+  <ion-list class="custom-list">
+    <app-saucer-item
+    *ngFor="let saucer of saucers; let i = index"
+    [saucer] = "saucer"
+    (showSaucer)=openShowSaucer($event)
+    (deleteSaucer)=removeSaucer($event)
+    >
   </app-saucer-item>
+  </ion-list>
 </ion-content>

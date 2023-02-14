@@ -1,6 +1,6 @@
 <ion-item (click)="openSaucerDetailModal(saucer)" [color]="dynamicColor ? dynamicColor:'ligth'">
   <ion-thumbnail slot="start">
-    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+    <img [src]="saucer.imagePath != null ? domSanitizationService.bypassSecurityTrustUrl(saucer.imagePath) : imageDefault"/>
   </ion-thumbnail>
   <ion-label>
     <h3>{{saucer.name}}</h3>

@@ -4,13 +4,21 @@ export interface Saucer {
     description: string;
     price: number;
     status?: Boolean;
+    imageSaucer?: {
+        imageBase64?: string,
+        extension?: string,
+    }
+    imagePath?: string
 }
 
 export interface OrderSaucer {
     id?: number;
     quantity: number;
+    name?: string;
+    imagePath?: string;
     pivot?: {
-        quantity?: number
+        quantity?: number;
+        total_saucer?: number;
     };
 }
 
